@@ -169,8 +169,8 @@ class LyricsWindow(QWidget):
                 
                 self.lyrics_label.setText("\n".join(lyrics_to_display))
                 self.setWindowTitle("▶ 재생 중" if is_playing else "⏸ 일시 정지 중")
-            else:
-                self.lyrics_label.setText("현재 재생 중인 곡이 없습니다.")
+        else:
+            self.lyrics_label.setText("현재 재생 중인 곡이 없습니다.")
 
 #------------------------------------------------------------
     # 마우스 눌렀을 때 이벤트 처리
