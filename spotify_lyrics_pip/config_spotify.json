@@ -1,5 +1,0 @@
-{
-    "SPOTIFY_CLIENT_ID" : "8bdb6fa5b63c4156b41335e5edc00dd3",
-    "SPOTIFY_CLIENT_SECRET" : "a83525907a1744c690b67bc2be6cfcb2",
-    "SPOTIFY_REDIRECT_URI" : "http://127.0.0.1:8888/callback"
-}
