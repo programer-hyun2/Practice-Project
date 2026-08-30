@@ -12,8 +12,7 @@ def get_lyrics_from_lrclib(artist, title, album, duration):
         
         foundlyrics = lyrics.synced_lyrics or lyrics.unsynced_lyrics
         return foundlyrics
-    except Exception as e:
-        print(f"LrcLib API 오류: {e}")
+    except:
         return None
 
 def lyrics_parsing_with_time(lyrics):
@@ -41,5 +40,23 @@ def lyrics_parsing_with_time(lyrics):
             if line.strip():  # 빈 줄이 아니면
                 # 각 줄에 인덱스 기반 가상 타임스탬프 부여 (줄 단위로 구분하기 위해)
                 parsed_lyrics.append((i * 0.001, line.strip()))
+    
+    return parsed_lyrics, has_timestamp
+
+def get_lyrics(track_name, artist_name, album_name, duration_ms):
+    """곡 정보로 가사 가져오기"""
+    if not (track_name and artist_name):
+        return [(0, "현재 재생 중인 곡이 없습니다.")], False
+    
+    duration_seconds = int(duration_ms / 1000)
+    raw_lyrics = get_lyrics_from_lrclib(artist_name, track_name, album_name, duration_seconds)
+    
+    if not raw_lyrics:
+        return [(0, "가사를 찾을 수 없습니다.")], False
+    
+    parsed_lyrics, has_timestamp = lyrics_parsing_with_time(raw_lyrics)
+    
+    if not parsed_lyrics:
+        return [(0, "가사를 찾을 수 없습니다.")], False
     
     return parsed_lyrics, has_timestamp
